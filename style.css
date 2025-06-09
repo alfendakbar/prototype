@@ -1,0 +1,1008 @@
+/* style.css (Versi Modifikasi) */
+
+:root {
+  --primary: #2d55ed; /* Sedikit mencerahkan warna biru agar lebih vibrant */
+  --primary-light: #eef2ff; /* Warna biru sangat terang untuk background hover */
+  
+  /* Warna Tema Terang yang Ditingkatkan */
+  --bg: #f8f9fa; /* Latar belakang abu-abu yang lebih cerah */
+  --surface-color: #ffffff; /* Warna untuk kartu/permukaan */
+  --text-color: #1a1a1a; /* Hitam yang tidak terlalu pekat, lebih nyaman di mata */
+  --subtle-text-color: #5a6169; /* Warna abu-abu untuk teks deskripsi */
+  --border-color: #dee2e6; /* Warna border yang lebih lembut */
+  --shadow-color: rgba(45, 85, 237, 0.1); /* Warna bayangan konsisten */
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: var(--text-color);
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 7%; /* Sedikit penyesuaian padding */
+  background-color: rgba(255, 255, 255, 0.85); /* Efek kaca yang lebih jelas */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: box-shadow 0.3s ease;
+}
+
+/* --- Aturan Baru untuk Logo (Gambar + Teks) --- */
+
+/* 1. Mengatur Kontainer Utama (.navbar-logo) */
+.navbar .navbar-logo {
+  display: flex;         /* Membuat gambar dan teks sejajar ke samping */
+  align-items: center;   /* Menyelaraskan keduanya di tengah secara vertikal */
+  gap: 0.2rem;           /* Memberi jarak antara gambar dan teks */
+  text-decoration: none; /* Menghapus garis bawah jika ada */
+}
+
+/* 2. Mengatur Ukuran Gambar Logo */
+.navbar .logo-image {
+  height: 100px; /* ATUR TINGGI GAMBAR LOGO DI SINI */
+  width: auto;  /* Lebar akan menyesuaikan otomatis */
+}
+
+/* 3. Mengatur Gaya Teks "SIMLOG" */
+.navbar .navbar-logo span {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+.navbar .navbar-nav a {
+  color: var(--text-color);
+  display: inline-block;
+  font-size: 1.3rem; /* Sedikit disesuaikan */
+  margin: 0 1.2rem;
+  font-weight: 500; /* Dibuat sedikit lebih tebal */
+  position: relative;
+}
+
+.navbar .navbar-nav a:hover {
+  color: var(--primary);
+}
+
+.navbar .navbar-nav a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar .navbar-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar .navbar-extra a {
+  color: var(--text-color);
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.navbar .navbar-extra a:hover {
+  color: var(--primary);
+}
+
+#hamburger-menu {
+  display: none;
+}
+
+/* --- Hero Section (Versi Slider) --- */
+.hero {
+  min-height: 100vh;
+  width: 100%;
+  position: relative; /* Penting untuk posisi tombol nav */
+  overflow: hidden; /* Sembunyikan slide yang tidak aktif */
+  padding: 0; /* Hapus padding default section */
+  display: flex; /* Hapus display flex lama */
+  align-items: stretch;
+}
+
+.slider-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  width: 400%; /* 100% x 4 slide */
+  height: 100%;
+  transition: transform 0.6s ease-in-out; /* Animasi geser */
+}
+
+.slide {
+  width: 25%; /* 100% / 4 slide */
+  height: 100vh; /* Setinggi layar */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Gambar akan menutupi area tanpa penyok */
+  z-index: 1;
+  /* Membuat gambar sedikit gelap agar teks mudah dibaca */
+  filter: brightness(0.6); 
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2; /* Konten berada di atas gambar */
+  padding: 1.4rem 7%;
+  max-width: 70rem;
+}
+
+.slide-content h1 {
+  font-size: 3.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.slide-content h1 span {
+  color: var(--primary);
+}
+
+.slide-content p {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  font-weight: 300;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Tombol Navigasi Kiri & Kanan */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.slider-nav:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.slider-nav.prev {
+  left: 2rem;
+}
+
+.slider-nav.next {
+  right: 2rem;
+}
+
+.slider-nav i {
+  width: 30px;
+  height: 30px;
+}
+
+/* --- General Section Styling --- */
+.company-profile,
+.services,
+.rates,
+.contact {
+  padding: 8rem 7% 2rem;
+}
+
+.company-profile h2,
+.services h2,
+.rates h2,
+.contact h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.company-profile h2 span,
+.services h2 span,
+.rates h2 span,
+.contact h2 span {
+  color: var(--primary);
+}
+
+.services .section-description,
+.rates .section-description,
+.contact > p {
+  text-align: center;
+  max-width: 50rem;
+  margin: auto;
+  font-weight: 400;
+  line-height: 1.7;
+  font-size: 1.4rem;
+  margin-bottom: 4rem;
+  color: var(--subtle-text-color);
+}
+
+/* --- Company Profile Section (Versi Modifikasi) --- */
+
+/* Menata kontainer utama menjadi Grid 2x2 */
+.company-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Membuat 2 kolom dengan lebar sama */
+  gap: 2.5rem; /* Jarak antar blok */
+  margin-top: 3rem;
+}
+
+/* Styling umum untuk setiap blok di dalam grid */
+.company-item {
+  padding: 2rem;
+  text-align: left; /* Mengubah dari center ke left */
+}
+
+.company-item h3 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.company-item p {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: var(--subtle-text-color);
+}
+
+/* Styling untuk kartu dengan background (Nilai dan Mengapa) */
+.why-us-box,
+.value-box {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Styling KHUSUS untuk kartu biru "Mengapa Memilih SIMLOG?" */
+.why-us-box {
+  background-color: var(--primary-light); /* Warna biru muda dari :root */
+  border: 1px solid rgba(45, 85, 237, 0.2);
+}
+.why-us-box h3 {
+  color: var(--primary);
+}
+.why-us-list {
+  list-style: none;
+  padding: 0;
+}
+.why-us-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 1.2rem;
+}
+.why-us-list li i {
+  color: var(--primary);
+  width: 22px;
+  height: 22px;
+}
+
+/* Styling untuk kartu "Nilai-Nilai Kami" */
+.value-item {
+  margin-bottom: 1.5rem;
+}
+.value-item:last-child {
+  margin-bottom: 0;
+}
+.value-item strong {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.2rem;
+}
+.value-item p {
+  font-size: 1.3rem;
+}
+
+/* Styling untuk list "Misi Kami" */
+.mission-list {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-top: 1rem;
+}
+.mission-list li {
+  font-size: 1.4rem;
+  color: var(--subtle-text-color);
+  margin-bottom: 0.8rem;
+}
+
+/* Membuat layout menjadi 1 kolom di layar yang lebih kecil (Tablet & HP) */
+@media (max-width: 992px) {
+  .company-grid-container {
+    grid-template-columns: 1fr; /* Ubah menjadi 1 kolom */
+  }
+}
+
+/* --- Services Section (Versi Modifikasi Total) --- */
+
+.services {
+  padding-bottom: 5rem; /* Menambah jarak di bawah */
+}
+
+.services .services-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.services .services-header h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.services .services-header p {
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--subtle-text-color);
+  line-height: 1.7;
+}
+
+.services-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolom di layar besar */
+  gap: 2rem;
+}
+
+.service-card {
+  display: flex;
+  align-items: flex-start; /* Ikon dan konten sejajar di atas */
+  gap: 2rem;
+  background-color: var(--surface-color);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px var(--shadow-color);
+}
+
+.service-icon-wrapper {
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-icon-wrapper i {
+  color: var(--primary);
+  width: 28px;
+  height: 28px;
+  stroke-width: 2;
+}
+
+.service-content h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.service-content p {
+  font-size: 1.4rem;
+  color: var(--subtle-text-color);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.service-features li i {
+  color: var(--primary); /* Warna centang biru */
+  width: 20px;
+  height: 20px;
+}
+
+/* Bagian CTA (Call to Action) Biru */
+.services-cta {
+  background-color: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 16px;
+  margin-top: 5rem;
+}
+
+.services-cta h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.services-cta p {
+  font-size: 1.6rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cta-buttons a {
+  padding: 1rem 2.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.cta-buttons .btn-primary {
+  background-color: #fff;
+  color: var(--primary);
+}
+
+.cta-buttons .btn-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.cta-buttons a:hover {
+  transform: translateY(-3px);
+}
+
+/* Penyesuaian Responsif untuk Services */
+@media (max-width: 992px) {
+  .services-grid-container {
+    grid-template-columns: 1fr; /* Ubah menjadi 1 kolom di tablet */
+  }
+}
+
+/* --- Rates Section --- */
+
+/* Menyesuaikan padding section Rates secara umum */
+.rates {
+  padding: 8rem 7% 4rem;
+}
+
+/* Mengganti nama class agar tidak bentrok dengan .row di section lain */
+.rates-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Membuat semua kartu sama tinggi */
+  margin-top: 2rem;
+}
+
+/* Menata judul dan deskripsi section */
+.rates-title {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.rates-title span {
+  color: var(--primary);
+}
+.rates-description {
+  color: var(--subtle-text-color);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+  font-size: 1.3rem;
+  line-height: 1.7;
+}
+
+/* Styling dasar untuk setiap kartu harga */
+.rate-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Diperlukan untuk badge 'Populer' */
+  height: 560px; /* Ganti nilai ini sesuai kebutuhan Anda */
+
+  
+}
+
+.rate-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Nama paket, misal "Paket Basic" */
+.rate-card h3 {
+  font-size: 0.875remrem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  
+}
+
+/* Kontainer untuk harga */
+.price-container {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0.5rem 0;
+}
+.price-container small {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--subtle-text-color);
+}
+
+/* Deskripsi singkat di bawah harga */
+.rate-card .card-description {
+  font-size: 0.75rem;
+  color: var(--subtle-text-color);
+  min-height: 40px; /* Jaga ruang agar layout konsisten */
+  
+}
+
+/* Garis pemisah */
+.rate-card hr {
+  border: none;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 1.5rem 0;
+}
+
+/* Daftar Fitur (ul) */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  text-align: left;
+  flex-grow: 1; /* PENTING: Mendorong tombol ke bawah */
+}
+.features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+.features-list li i {
+  color: #28a745; /* Warna hijau untuk ikon centang */
+  width: 20px;
+  height: 20px;
+}
+
+/* Tombol "Pilih Paket" */
+.rate-card .cta-button {
+  display: block;
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background-color: var(--primary);
+  color: #fff;
+  border: 2px solid transparent;
+  
+}
+.rate-card .cta-button:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+  
+}
+
+/* Tombol varian gelap */
+.rate-card .cta-button.dark {
+  background-color: #111827; /* Warna gelap */
+  color: #fff;
+}
+
+/* --- Styling Khusus untuk Kartu 'Populer' dan 'Premium' --- */
+
+/* Kartu Standard (Populer) */
+.rate-card.popular {
+  border: 2px solid var(--primary);
+  transform: scale(1.05); /* Sedikit lebih besar */
+}
+.rate-card.popular:hover {
+  transform: scale(1.08) translateY(-10px); /* Efek hover lebih menonjol */
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Kartu Premium */
+.rate-card.premium {
+  border: 2px solid #a855f7; /* Warna ungu untuk border premium */
+}
+/* --- Contact Section (Versi Modifikasi Total) --- */
+.contact {
+  padding-bottom: 5rem;
+}
+
+.contact .contact-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.contact .contact-header h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.contact .contact-header p {
+  font-size: 1.4rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--subtle-text-color);
+  line-height: 1.7;
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Kolom kiri lebih kecil dari kolom kanan */
+  gap: 3rem;
+  background-color: var(--surface-color);
+  padding: 3rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Kolom Kiri: Informasi Kontak */
+.contact-info h4, .contact-form h4 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info > p, .contact-form > p {
+  font-size: 1.3rem;
+  color: var(--subtle-text-color);
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.info-card:last-child {
+  border-bottom: none;
+}
+
+.info-card .icon-wrapper {
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card .icon-wrapper i {
+  color: var(--primary);
+  width: 24px;
+  height: 24px;
+}
+
+.info-card .info-text h5 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.info-card .info-text p {
+  font-size: 1.4rem;
+  color: var(--subtle-text-color);
+  line-height: 1.6;
+}
+.info-card .info-text a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.info-card .info-text a:hover {
+  color: var(--primary);
+}
+
+
+/* Kolom Kanan: Form */
+.contact-form form .form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.contact-form label {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(45, 85, 237, 0.15);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .submit-button {
+  width: 100%;
+  padding: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #111827; /* Warna tombol gelap */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.contact-form .submit-button:hover {
+  background-color: #374151;
+  transform: scale(1.02);
+}
+
+
+/* --- CTA Section --- */
+.cta-section {
+  background-color: var(--primary-light);
+  text-align: center;
+  padding: 5rem 7%;
+  margin: 5rem 0; /* Memberi jarak dari kontak dan footer */
+  border-radius: 16px;
+}
+
+.cta-section h2 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: 1.6rem;
+  color: var(--subtle-text-color);
+  max-width: 500px;
+  margin: 0 auto 2rem auto;
+}
+
+.cta-section .cta-button {
+  display: inline-block;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 1.2rem 3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.cta-section .cta-button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+
+/* Penyesuaian Responsif untuk Kontak & CTA */
+@media (max-width: 992px) {
+  .contact-container {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom di tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form form .form-row {
+    flex-direction: column; /* Nama depan & belakang jadi vertikal di HP */
+    gap: 0;
+  }
+}
+
+/* --- Footer --- */
+footer {
+  background-color: #111827; /* Warna footer lebih gelap untuk kontras */
+  color: #e5e7eb;
+  text-align: center;
+  padding: 2rem 0 2rem;
+  margin-top: 3rem;
+}
+
+footer .socials {
+  padding: 1rem 0;
+}
+
+footer .socials a {
+  color: #e5e7eb;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+
+footer .socials a:hover {
+  color: var(--primary);
+}
+
+footer .links {
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+footer .links a {
+  color: #d1d5db;
+  padding: 0.7rem 1rem;
+  transition: color 0.3s;
+  font-size: 1.2rem;
+}
+
+footer .links a:hover {
+  color: #fff;
+}
+
+footer .credit {
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+footer .credit a {
+  color: #e5e7eb;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+footer .credit a:hover {
+  text-decoration: underline;
+}
+
+/* --- Media Queries (Responsive) --- */
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+
+  #hamburger-menu {
+    display: inline-block;
+  }
+
+  .navbar .navbar-nav {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    background-color: var(--surface-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 30rem;
+    height: 100vh;
+    transition: right 0.4s ease-in-out;
+  }
+
+  .navbar .navbar-nav.active {
+    right: 0;
+  }
+
+  .navbar .navbar-nav a {
+    color: var(--text-color);
+    display: block;
+    margin: 1.5rem;
+    padding: 0.8rem;
+    font-size: 2rem;
+  }
+
+  .navbar .navbar-nav a::after {
+    transform-origin: 0 0;
+  }
+
+  .navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.2);
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+}
+
